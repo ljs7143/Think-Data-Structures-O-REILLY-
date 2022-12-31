@@ -34,6 +34,7 @@ public class MyArrayList<T> implements List<T> {
 		mal.add(1);
 		mal.add(2);
 		mal.add(3);
+		mal.add(1, 6);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 
 		mal.remove(new Integer(2));
@@ -54,6 +55,15 @@ public class MyArrayList<T> implements List<T> {
 		return true;
 	}
 
+	//이해완료
+	//ex)[1,2,3] 배열이 있고 index=1에 6을 넣는다고 했을 때 
+	//1. add(element); 코드를 통해 [1,2,3,6] 배열을 만듬 
+	//2.	for (int i=size-1; i>index; i--) {
+    //			array[i] = array[i-1];
+	//	} 코드를 통해 index를 기준으로 한칸씩 밀어냄 즉 [1, ,2,3]이 됨
+	//
+	//3. array[index] = element;를 통해 
+	// [1,6,2,3]이 됨 
 	@Override
 	public void add(int index, T element) {
 		if (index < 0 || index > size) {
@@ -61,13 +71,15 @@ public class MyArrayList<T> implements List<T> {
 		}
 		// add the element to get the resizing
 		add(element);
-
 		// shift the elements
+
+		//이게 앞에서부터 들어와되는거 아님? 
 		for (int i=size-1; i>index; i--) {
 			array[i] = array[i-1];
 		}
 		// put the new one in the right place
 		array[index] = element;
+
 	}
 
 	@Override
